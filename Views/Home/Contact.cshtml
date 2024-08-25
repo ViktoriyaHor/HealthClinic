@@ -1,0 +1,39 @@
+@{
+    ViewBag.Title = "Contact Us";
+    ViewBag.Message = "We're Here to Support You.";
+}
+
+<main class="container mt-5">
+    <h2 class="text-center mb-4" id="title">@ViewBag.Title</h2>
+    <p class="lead text-center mb-4">@ViewBag.Message</p>
+
+    <hr />
+
+    <div class="row">
+        <div class="col-md-6">
+            <img src="~/Images/ContactUs.png" class="img-fluid rounded mb-4" alt="Contact Us" />
+        </div>
+        <div class="col-md-6">
+            <div class="map-container">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d13184.286470664068!2d-97.13692744490837!3d49.89513618313886!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x52ea6d0236b29d3f%3A0x1e1bda88f807b51e!2s123%20Main%20St%2C%20Winnipeg%2C%20MB%20R3C%201A3%2C%20Canada!5e0!3m2!1sen!2sus!4v1625007168301!5m2!1sen!2sus"
+                    allowfullscreen="" loading="lazy">
+                </iframe>
+                <div class="text-content">
+                    <p><strong>Operating Hours:</strong> Monday to Friday, 8:00 AM - 6:00 PM</p>
+                    <address>
+                        <strong>Clinic Location:</strong> 123 Main Street, Winnipeg, MB R3C 1A3, Canada<br />
+                        <strong>Head Office:</strong> 456 Elm Avenue, Winnipeg, MB R3C 4K4, Canada<br />
+                    </address>
+                    <address>
+                        <strong>Tel:</strong> +1 (204) 555-1234<br />
+                        <strong>Fax:</strong> +1 (204) 555-5678
+                    </address>
+                    <address>
+                        <strong>Email:</strong> <a href="mailto:Support@healthclinicwinnipeg.ca">Support@healthclinicwinnipeg.ca</a>
+                    </address>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

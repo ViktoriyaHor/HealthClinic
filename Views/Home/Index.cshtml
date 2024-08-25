@@ -1,0 +1,53 @@
+﻿<head>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+</head>
+
+@{
+    ViewBag.Title = "Home Page";
+    ViewBag.Message = "The official system for managing Health Clinic's operations.";
+}
+
+<main>
+    <section class="jumbotron text-center py-5 my-4">
+        <div class="container">
+            <h1 class="display-4" id="applicationTitle">Health Clinic Management System</h1>
+            <p class="lead">@ViewBag.Message</p>
+            <hr class="my-4" />
+            <p class="slogan">
+                "Your Health, Our Priority - Committed to Excellence in Patient Care."
+            </p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <section aria-labelledby="contactTitle">
+                    <h2 id="contactTitle">Contact Us</h2>
+                    <p>
+                        To reach us for any queries or feedback about our clinic services, please click the button below. We are always here to assist you.
+                    </p>
+                    <p><a class="btn btn-outline-primary" href="@Url.Action("Contact", "Home")">Go to Contact &raquo;</a></p>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section aria-labelledby="servicesTitle">
+                    <h2 id="servicesTitle">Services</h2>
+                    <p>
+                        Learn more about the various healthcare services provided by our clinic. Click on the button below to discover the range of services we offer.
+                    </p>
+                    <p><a class="btn btn-outline-primary" href="@Url.Action("ServicesIndex", "Home")">Go to Services &raquo;</a></p>
+                </section>
+            </div>
+            <div class="col-md-4">
+                <section aria-labelledby="loginTitle">
+                    <h2 id="loginTitle">Web Portal</h2>
+                    <p>
+                        Login to access our web-hosted platform. The platform allows you to manage clinic services, appointments, and other healthcare-related tasks online.
+                    </p>
+                    <p><a class="btn btn-outline-primary" href="@Url.Action("Index", "Login")">Go to Login &raquo;</a></p>
+                </section>
+            </div>
+        </div>
+    </div>
+</main>

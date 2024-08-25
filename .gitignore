@@ -1,0 +1,49 @@
+# Ignore Visual Studio temporary files, build results, and
+# build directories.
+[Bb]in/
+[Oo]bj/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore development database files
+*.db
+
+# Ignore certificates
+*.crt
+*.pfx
+
+# Auto-generated files by Visual Studio
+*.csproj.user
+*.sln.docstates
+.vscode/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Web-specific files
+client/bin/
+client/obj/
+client/dist/
+client/build/
+node_modules/
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+
+# Office temporary files
+~$*
+*.tmp
+
+# JetBrains Rider
+.idea/
+*.sln.iml
+
+# MacOS specific files
+.DS_Store
+
+# ENV variables
+.env

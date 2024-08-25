@@ -1,0 +1,68 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+.map-container {
+  position: relative;
+  height: 600px; /* Adjust height as needed */
+}
+
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.map-container .text-content {
+  position: relative;
+  z-index: 10; /* Ensure the text is above the iframe */
+  padding: 1rem; /* Add padding to avoid text touching edges */
+  background-color: white; /* Optional: background color to make text stand out */
+}
+
+.jumbotron {
+  background-image: url('/Images/cover1.png'); /* Ensure this path is correct */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 50px 0; /* Adjust padding as needed */
+}
+
+.jumbotron p.slogan {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-top: 20px;
+}
+
+.btn-outline-primary {
+  color: #33b7c9; /* Turquoise text color */
+  border-color: #33b7c9; /* Turquoise border color */
+}
+
+.btn-outline-primary:hover {
+  color: #fff; /* Change text color on hover if needed */
+  background-color: #33b7c9; /* Turquoise background color on hover */
+  border-color: #33b7c9; /* Maintain turquoise border on hover */
+}
