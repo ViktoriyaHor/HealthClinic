@@ -1,4 +1,12 @@
+using DotNetEnv;
+
+Env.Load();
+// Retrieve the certificate password from environment variables
+var certificatePassword = Environment.GetEnvironmentVariable("CERTIFICATE_PASSWORD");
+
 var builder = WebApplication.CreateBuilder(args);
+// Replace the placeholder with the actual environment variable
+builder.Configuration["Kestrel:Endpoints:Https:Certificate:Password"] = certificatePassword;
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
