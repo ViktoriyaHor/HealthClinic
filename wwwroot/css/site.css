@@ -66,3 +66,12 @@ body {
   background-color: #33b7c9; /* Turquoise background color on hover */
   border-color: #33b7c9; /* Maintain turquoise border on hover */
 }
+
+.underline-hr {
+  border: none;
+  border-top: 3px solid #33b7c9;
+  background-color: #33b7c9; /* Set the underline color */
+  width: 100%; /* Set the underline width (adjust as needed) */
+  margin-top: 0.5rem; /* Add some space between the text and the underline */
+  margin-left: 0; /* Align the underline with the text */
+}
