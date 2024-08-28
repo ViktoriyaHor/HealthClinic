@@ -2,15 +2,16 @@ using HealthClinic.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace HealthClinic.Controllers
 {
-    public class AdminController : Controller
+    public class UserController : Controller
     {
         private UserManager<AppUser> userManager;
         private IPasswordHasher<AppUser> passwordHasher;
 
-        public AdminController(UserManager<AppUser> usrMgr, IPasswordHasher<AppUser> passwordHash)
+        public UserController(UserManager<AppUser> usrMgr, IPasswordHasher<AppUser> passwordHash)
 
         {
             userManager = usrMgr;
@@ -21,7 +22,7 @@ namespace HealthClinic.Controllers
         {
             return View(userManager.Users);
         }
-        
+
         [Authorize(Roles = "Admin")]
         public ViewResult Create() => View();
 
@@ -102,17 +103,39 @@ namespace HealthClinic.Controllers
         public async Task<IActionResult> Delete(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
+
             if (user != null)
             {
+                // Check if the user is an admin
+                if (await userManager.IsInRoleAsync(user, "Admin"))
+                {
+                    // Add a model error and return to the Index view if the user is an admin
+                    ModelState.AddModelError("", "Admin users cannot be deleted.");
+                    // Pass users to the view for display
+                    return View("Index", await userManager.Users.ToListAsync());
+                }
+
                 IdentityResult result = await userManager.DeleteAsync(user);
+
                 if (result.Succeeded)
                     return RedirectToAction("Index");
                 else
-                    Errors(result);
+                {
+                    // Collect errors if the deletion fails
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError("", error.Description);
+                    }
+                    // Pass users to the view for display
+                    return View("Index", await userManager.Users.ToListAsync());
+                }
             }
             else
-                ModelState.AddModelError("", "User Not Found");
-            return View("Index", userManager.Users);
+            {
+                ModelState.AddModelError("", "User not found.");
+                // Pass users to the view for display
+                return View("Index", await userManager.Users.ToListAsync());
+            }
         }
     }
 }

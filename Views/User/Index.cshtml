@@ -9,6 +9,8 @@
 
 <a asp-action="Create" class="btn btn-secondary my-3">Create a User</a>
 
+<div asp-validation-summary="All" class="text-danger"></div>
+
 <table class="table table-sm table-bordered">
     <tr>
         <th>ID</th>
@@ -38,3 +40,5 @@
         </tr>
     }
 </table>
+
+<a asp-controller="Home" asp-action="Admin" class="btn btn-secondary">Back</a>

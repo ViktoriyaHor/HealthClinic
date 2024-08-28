@@ -6,7 +6,6 @@
 <hr class="underline-hr">
 <h1 class="text-center">Update User</h1>
 <hr class="underline-hr">
-<a asp-action="Index" class="btn btn-secondary">Back</a>
 <div asp-validation-summary="All" class="text-danger"></div>
  
 <form asp-action="Update" method="post">
@@ -22,5 +21,6 @@
         <label for="password">Password</label>
         <input name="password" class="form-control" />
     </div>
+    <a asp-action="Index" class="btn btn-secondary">Back</a>
     <button type="submit" class="btn btn-primary my-3">Save</button>
 </form>

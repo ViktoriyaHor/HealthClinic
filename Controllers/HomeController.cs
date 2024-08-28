@@ -26,6 +26,14 @@ public class HomeController : Controller
         return View((object)message);
     }
 
+    [Authorize(Roles = "Admin")]
+    public async Task<IActionResult> Admin()
+    {
+        AppUser user = await userManager.GetUserAsync(HttpContext.User);
+        string message = "Hello " + user.UserName;
+        return View((object)message);
+    }
+
     public IActionResult Index()
     {
         return View();

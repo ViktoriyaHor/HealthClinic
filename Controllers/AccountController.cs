@@ -52,7 +52,7 @@ namespace HealthClinic.Controllers
                     if (result.Succeeded)
                         if (await userManager.IsInRoleAsync(appUser, "Admin"))
                         {
-                            return Redirect("/admin");
+                            return RedirectToAction("Admin", "Home");
                         }
                         else if (string.IsNullOrWhiteSpace(login.ReturnUrl) || !Url.IsLocalUrl(login.ReturnUrl))
                         {

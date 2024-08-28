@@ -1,0 +1,16 @@
+@model string
+
+@{
+    ViewData["Title"] = "Admin";
+}
+<hr class="underline-hr">
+<h1 class="text-center">Admin Dashboard</h1>
+<hr class="underline-hr">
+
+<div>
+<a href="@Url.Action("Index", "User")">Users</a>
+</div>
+
+<div class="mt-4">
+    <a href="@Url.Action("Index", "Role")">Roles</a>
+</div>
