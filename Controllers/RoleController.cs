@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using HealthClinic.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthClinic.Controllers
 {
@@ -15,6 +16,7 @@ namespace HealthClinic.Controllers
             userManager = userMrg;
         }
 
+        [Authorize(Roles = "Admin")]
         public ViewResult Index() => View(roleManager.Roles);
 
         private void Errors(IdentityResult result)
@@ -22,10 +24,12 @@ namespace HealthClinic.Controllers
             foreach (IdentityError error in result.Errors)
                 ModelState.AddModelError("", error.Description);
         }
+        [Authorize(Roles = "Admin")]
 
         public IActionResult Create() => View();
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create([Required] string name)
         {
             if (ModelState.IsValid)
@@ -40,6 +44,7 @@ namespace HealthClinic.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -56,6 +61,7 @@ namespace HealthClinic.Controllers
             return View("Index", roleManager.Roles);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id)
         {
             IdentityRole role = await roleManager.FindByIdAsync(id);
@@ -73,8 +79,9 @@ namespace HealthClinic.Controllers
                 NonMembers = nonMembers
             });
         }
- 
+
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(RoleModification model)
         {
             IdentityResult result;
@@ -101,7 +108,7 @@ namespace HealthClinic.Controllers
                     }
                 }
             }
- 
+
             if (ModelState.IsValid)
                 return RedirectToAction(nameof(Index));
             else

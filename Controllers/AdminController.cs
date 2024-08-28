@@ -1,6 +1,7 @@
 using HealthClinic.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HealthClinic.Controllers
 {
@@ -8,22 +9,24 @@ namespace HealthClinic.Controllers
     {
         private UserManager<AppUser> userManager;
         private IPasswordHasher<AppUser> passwordHasher;
- 
+
         public AdminController(UserManager<AppUser> usrMgr, IPasswordHasher<AppUser> passwordHash)
 
         {
             userManager = usrMgr;
             passwordHasher = passwordHash;
         }
-
+        [Authorize(Roles = "Admin")]
         public IActionResult Index()
         {
             return View(userManager.Users);
         }
-
+        
+        [Authorize(Roles = "Admin")]
         public ViewResult Create() => View();
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)
@@ -47,6 +50,7 @@ namespace HealthClinic.Controllers
             return View(user);
         }
 
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -55,8 +59,9 @@ namespace HealthClinic.Controllers
             else
                 return RedirectToAction("Index");
         }
- 
+
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Update(string id, string email, string password)
         {
             AppUser user = await userManager.FindByIdAsync(id);
@@ -66,12 +71,12 @@ namespace HealthClinic.Controllers
                     user.Email = email;
                 else
                     ModelState.AddModelError("", "Email cannot be empty");
- 
+
                 if (!string.IsNullOrEmpty(password))
                     user.PasswordHash = passwordHasher.HashPassword(user, password);
                 else
                     ModelState.AddModelError("", "Password cannot be empty");
- 
+
                 if (!string.IsNullOrEmpty(email) && !string.IsNullOrEmpty(password))
                 {
                     IdentityResult result = await userManager.UpdateAsync(user);
@@ -85,7 +90,7 @@ namespace HealthClinic.Controllers
                 ModelState.AddModelError("", "User Not Found");
             return View(user);
         }
- 
+
         private void Errors(IdentityResult result)
         {
             foreach (IdentityError error in result.Errors)
@@ -93,6 +98,7 @@ namespace HealthClinic.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(string id)
         {
             AppUser user = await userManager.FindByIdAsync(id);

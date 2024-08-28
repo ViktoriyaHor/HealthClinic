@@ -19,7 +19,7 @@ public class HomeController : Controller
     }
 
     [Authorize]
-    public async Task<IActionResult> SecuredAsync()
+    public async Task<IActionResult> Appointments()
     {
         AppUser user = await userManager.GetUserAsync(HttpContext.User);
         string message = "Hello " + user.UserName;
