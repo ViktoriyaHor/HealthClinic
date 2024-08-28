@@ -1,0 +1,15 @@
+@model string
+ 
+@{
+    ViewData["Title"] = "Authentication";
+}
+<hr class="underline-hr">
+<h1 class="text-center">Secured</h1>
+<hr class="underline-hr">
+
+@Model
+
+@if (User?.Identity?.IsAuthenticated ?? false)
+{
+    <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+}

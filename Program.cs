@@ -29,8 +29,17 @@ builder.Configuration["Kestrel:Endpoints:Https:Certificate:Password"] = certific
 builder.Services.AddDbContext<HealthClinicDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("HealthClinicDbContext")));
 
 builder.Services.AddIdentity<AppUser, IdentityRole>().AddEntityFrameworkStores<HealthClinicDbContext>().AddDefaultTokenProviders();
-// Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.Configure<IdentityOptions>(opts =>
+{
+    opts.User.RequireUniqueEmail = true;
+});
+builder.Services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Authenticate/Login");
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.Cookie.Name = ".AspNetCore.Identity.Application";
+    options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+    options.SlidingExpiration = true;
+});
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

@@ -1,4 +1,6 @@
 using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using HealthClinic.Models;
 
@@ -7,10 +9,21 @@ namespace HealthClinic.Controllers;
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
+    private UserManager<AppUser> userManager;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController(ILogger<HomeController> logger, UserManager<AppUser> userMgr)
     {
         _logger = logger;
+        userManager = userMgr;
+
+    }
+
+    [Authorize]
+    public async Task<IActionResult> SecuredAsync()
+    {
+        AppUser user = await userManager.GetUserAsync(HttpContext.User);
+        string message = "Hello " + user.UserName;
+        return View((object)message);
     }
 
     public IActionResult Index()
